@@ -8,26 +8,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const mongoURI = 'mongodb://localhost:50089/mydatabase';
-const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        // Connect to MongoDB
-        yield mongoose_1.default.connect(mongoURI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
-        // Set global Mongoose options after connecting
-        //   mongoose.set('useFindAndModify', false);
-        //   mongoose.set('useCreateIndex', true);
-        console.log('Connected to MongoDB');
-    }
-    catch (error) {
-        console.error('Error connecting to MongoDB:', error);
-    }
-});
-exports.default = connectDB;
+const mongodb_1 = require("mongodb");
+const url = 'mongodb://127.0.0.1:27017';
+const dbName = 'toDo';
+function connectToMongo() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const client = new mongodb_1.MongoClient(url, { useUnifiedTopology: true });
+        try {
+            yield client.connect();
+            console.log('Connected to MongoDB');
+            return client.db(dbName);
+        }
+        catch (error) {
+            console.error('Error connecting to MongoDB:', error);
+            throw error;
+        }
+    });
+}
+exports.default = connectToMongo;

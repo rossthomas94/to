@@ -31,7 +31,7 @@ const router = express_1.default.Router();
 const todoController = __importStar(require("../controller/todoController"));
 router.get('/', todoController.getAll);
 router.get('/id', todoController.getById);
-router.post('/', todoController.createTodo);
-router.put('/', todoController.updateTodO);
-router.delete('/', todoController.deleteToDo);
+// router.post('/', todoController.createTodo)
+// router.put('/', todoController.updateToDo)
+// router.delete('/', todoController.deleteToDo)
 exports.default = router;
